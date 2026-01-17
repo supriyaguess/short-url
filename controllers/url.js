@@ -1,4 +1,4 @@
-const { nanoid } = require("nanoid");
+ const { nanoid } = require("nanoid");
 const URL = require('../models/url');
 
 async function handleGenerateNewShortURL(req, res) {
@@ -14,7 +14,8 @@ async function handleGenerateNewShortURL(req, res) {
         visitHistory: [],
      });
 
-     return res.json({ id: shortId});
+     return res.redirect("/");
+        
 }
 async function handleGetAnalytics(req,res) {
     const shortId = req.params.shortId;
