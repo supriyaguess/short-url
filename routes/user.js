@@ -4,7 +4,7 @@ const { handleUserSignup, handleUserLogin, handleUserLogout } = require("../cont
 
 const router = express.Router();
 
-router.post('/',handleUserSignup);
+router.post('/signup',handleUserSignup);
 router.post('/login',handleUserLogin);
 router.get('/logout', handleUserLogout);
 
