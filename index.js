@@ -1,5 +1,5 @@
 require("dotenv").config();
 const app = require("./server"); // server.js exports the express app
 
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8002;
 app.listen(PORT, () => console.log(`Server Started at PORT ${PORT}`));
