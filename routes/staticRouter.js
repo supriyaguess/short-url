@@ -12,7 +12,7 @@ router.get('/admin/urls', restrictTo(['ADMIN']), async (req,res) => {
 })
 
 router.get("/", restrictTo(["NORMAL", "ADMIN"]), async (req,res) => {
-    const allUrls =  await URL.find({ createdBy: req.user_id });
+    const allUrls =  await URL.find({ createdBy: req.user._id });
        res.render("home", {
         urls: allUrls,
     });
