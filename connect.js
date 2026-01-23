@@ -2,7 +2,15 @@ const mongoose = require("mongoose");
 
 async function connectToMongoDB(url) {
   if (!url) throw new Error("MONGODB_URL missing");
-  return mongoose.connect(url);
+  
+  // Configure for serverless environment
+  const options = {
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    bufferCommands: false
+  };
+  
+  return mongoose.connect(url, options);
 }
 
 module.exports = { connectToMongoDB };

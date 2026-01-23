@@ -41,11 +41,18 @@ async function handleUserSignup(req, res) {
 
     //const sessionId =  uuidv4();-- session id 
     const token = setUser( user);
+    res.clearCookie("token"); // Clear any existing token
     res.cookie("token", token);
      return res.redirect("/");
     }
 
+async function handleUserLogout(req, res) {
+    res.clearCookie("token");
+    return res.redirect("/login");
+}
+
 module.exports = {
     handleUserSignup,
     handleUserLogin,
+    handleUserLogout,
 };

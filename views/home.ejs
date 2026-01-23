@@ -5,13 +5,29 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
 </head>
 <body>
-    <h1>URL Shortener</h1>
+    <div class="header">
+        <h1>URL Shortener</h1>
+        <a href="/user/logout" class="logout-btn">Logout</a>
+    </div>
     <% if (locals.id) { %>
      <p>URL Generated: http://localhost:8001/url/<%= id %></p>
     <% } %>
