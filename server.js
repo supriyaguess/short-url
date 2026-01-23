@@ -25,10 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/", checkForAuthentication);
 
-app.use("/url", restrictTo(["NORMAL", "ADMIN"]), urlRoute);
-app.use("/user", userRoute);
-app.use("/", staticRouter);
-
+// Public redirect route (must be before protected routes)
 app.get("/url/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
 
@@ -41,6 +38,10 @@ app.get("/url/:shortId", async (req, res) => {
   if (!entry) return res.status(404).send("Short URL not found");
   return res.redirect(entry.redirectURL);
 });
+
+app.use("/url", restrictTo(["NORMAL", "ADMIN"]), urlRoute);
+app.use("/user", userRoute);
+app.use("/", staticRouter);
 
 // Vercel needs the handler export (NO app.listen here)
 module.exports = app;
