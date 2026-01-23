@@ -6,8 +6,7 @@ async function connectToMongoDB(url) {
   // Configure for serverless environment
   const options = {
     serverSelectionTimeoutMS: 5000,
-    socketTimeoutMS: 45000,
-    bufferCommands: false
+    socketTimeoutMS: 45000
   };
   
   return mongoose.connect(url, options);
