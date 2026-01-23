@@ -30,19 +30,29 @@ async function handleUserSignup(req, res) {
         return res.status(500).send("Internal Server Error");
     }
 }
+console.log("LOGIN API HIT");
+
    async function handleUserLogin(req,res) {
         const { email, password } = req.body;
         const user = await User.findOne({ email, password });
+        if (!user || user.password !== password) {
+  return res.render("login", {
+    error: "Invalid Email or Password",
+  });
+}
 
-        if(!user) 
-            return res.render("login", {
-        error: "Invalid Username or Password ",
-    });
+       
 
     //const sessionId =  uuidv4();-- session id 
     const token = setUser( user);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax",
+    });
+    
      return res.redirect("/");
+     
+
     }
 
 module.exports = {

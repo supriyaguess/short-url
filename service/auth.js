@@ -1,33 +1,26 @@
-//const sessionIdToUserMap = new Map();
 const jwt = require("jsonwebtoken");
 
-const sceret = "Supriya$123@$";
+const JWT_SECRET = process.env.JWT_SECRET;
 
-function setUser(user) { //--> this function make topken for stateless
-
-    return jwt.sign(
-        {
-        _id: user._id,
-        email: user.email,
-        role: user.role,
-        },
-        sceret
-    );
+function setUser(user) {
+  return jwt.sign(
+    {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+    },
+    JWT_SECRET
+  );
 }
-
-/* function setUser(id,user) {
-    sessionIdToUserMap.set(id,user);
-} */
 
 function getUser(token) {
-    if(!token) return null;
-    try {
-        return jwt.verify(token, sceret);    
-    } catch (error) {
-         return null;
-    }
+  if (!token) return null;
+
+  try {
+    return jwt.verify(token, JWT_SECRET);
+  } catch {
+    return null;
+  }
 }
-module.exports = {
-    setUser,
-    getUser,
-};
+
+module.exports = { setUser, getUser };
